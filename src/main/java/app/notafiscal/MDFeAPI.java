@@ -15,7 +15,6 @@ import com.fincatto.documentofiscal.DFAmbiente;
 import com.fincatto.documentofiscal.DFUnidadeFederativa;
 import com.fincatto.documentofiscal.mdfe3.MDFeConfig;
 import com.fincatto.documentofiscal.mdfe3.classes.consultaRecibo.MDFeConsultaReciboRetorno;
-import com.fincatto.documentofiscal.mdfe3.classes.consultanaoencerrados.MDFeConsultaNaoEncerrados;
 import com.fincatto.documentofiscal.mdfe3.classes.consultanaoencerrados.MDFeConsultaNaoEncerradosRetorno;
 import com.fincatto.documentofiscal.mdfe3.classes.lote.envio.MDFEnvioLote;
 import com.fincatto.documentofiscal.mdfe3.classes.lote.envio.MDFEnvioLoteRetornoDados;
@@ -24,8 +23,6 @@ import com.fincatto.documentofiscal.mdfe3.classes.nota.consulta.MDFeNotaConsulta
 import com.fincatto.documentofiscal.mdfe3.classes.nota.evento.MDFeRetorno;
 import com.fincatto.documentofiscal.mdfe3.utils.MDFGeraQRCode;
 import com.fincatto.documentofiscal.mdfe3.webservices.WSFacade;
-import com.fincatto.documentofiscal.nfe310.classes.nota.assinatura.NFSignature;
-import com.fincatto.documentofiscal.utils.DFAssinaturaDigital;
 import com.fincatto.documentofiscal.utils.DFPersister;
 
 
@@ -129,7 +126,9 @@ public class MDFeAPI {
 		sCertificadoSenha                           = CertificadoSenha;
 			       
 	}
-	
+
+
+
 	private DFUnidadeFederativa BuscaUnidadeFederativa(String UF) {
 		
 		DFUnidadeFederativa unidadefederativa;
@@ -257,7 +256,6 @@ public class MDFeAPI {
 		try {
 			value = new String(xml.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e2) {
-			// TODO Auto-generated catch block
 		      System.out.println(e2.getMessage());
 		}
 

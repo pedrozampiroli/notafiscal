@@ -1,15 +1,12 @@
-import app.notafiscal.NfeApi;
+import app.notafiscal.NFeApi;
 import com.fincatto.documentofiscal.DFModelo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class MDFeTest {
 
 
     public static void main(String[] args) {
 
-        NfeApi api = new NfeApi();
+        NFeApi api = new NFeApi();
 
         api.NfeConfigurar("@cafe@",
                             "changeit",
