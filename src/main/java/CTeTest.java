@@ -196,7 +196,17 @@ public class CTeTest {
             //ok
             //response = api.transmitir("1", "3.00", xml);
             //ok
-            response = api.inutilizar("41201118374429000104570010000022121110022123","141200000056993","TESTE TESTE TESTE TESTE","20", "000002213","000002213", "57","001");
+//            response = api.inutilizar("41201118374429000104570010000022121110022123","141200000056993","TESTE TESTE TESTE TESTE","20", "000002213","000002213", "57","001");
+            response = api.correcao(
+                    "41201118374429000104570010000022131110022139",
+                    "141200000056994",
+                    "TESTE TESTE TESTE TESTE",
+                    "rem",
+                    "xNome",
+                    "TESTE CTE ALTERADA",
+                    "01",
+                    "A Carta de Correcao e disciplinada pelo Art. 58-B do CONVENIO/SINIEF 06/89: Fica permitida a utilizacao de carta de correcao, para regularizacao de erro ocorrido na emissao de documentos fiscais relativos a prestacao de servico de transporte, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da prestacao;II - a correcao de dados cadastrais que implique mudanca do emitente, tomador, remetente ou do destinatario;III - a data de emissao ou de saida."
+            );
             //ok
             //response = api.geraChaveCTe(xml);
             //ok
