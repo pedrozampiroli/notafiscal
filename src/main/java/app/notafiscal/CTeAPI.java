@@ -273,7 +273,7 @@ public class CTeAPI {
         try {
             logs = new WSFacade(config).inutilizaCte(id, chaveAcesso, numeroProtocolo, xServ, cteInit, cteFinal, justificativa, ano, mod, serie);
         } catch (Exception e) {
-            logs = e.getMessage();
+            logs = "Error: " + e.getMessage();
         }
         return logs;
     }
@@ -327,15 +327,15 @@ public class CTeAPI {
         return logs;
     }
 
-    public String correcao(String chaveAcesso, String numeroProtocolo, String motivo, String grupoAlterado, String campoAlterado, String valorAlterado, String nroItemAlterado, String condicaoUso) {
-        if ((chaveAcesso.length() == 44) && (numeroProtocolo != null) && (motivo != null) && (grupoAlterado.length() <= 20) && (campoAlterado.length() <= 20) && (valorAlterado.length() <= 500) && (nroItemAlterado.length() == 2) && (condicaoUso != null)) {
+    public String correcao(String chaveAcesso, String numeroProtocolo, String grupoAlterado, String campoAlterado, String valorAlterado, String nroItemAlterado, String condicaoUso) {
+        if ((chaveAcesso.length() == 44) && (numeroProtocolo.length() == 15) && (grupoAlterado.length() <= 20) && (campoAlterado.length() <= 20) && (valorAlterado.length() <= 500) && (nroItemAlterado != null) && (condicaoUso != null)) {
             try {
-                logs = new WSFacade(config).correcaoCteString(chaveAcesso, numeroProtocolo, motivo, grupoAlterado, campoAlterado, valorAlterado, nroItemAlterado, condicaoUso);
+                logs = new WSFacade(config).correcaoCteString(chaveAcesso, numeroProtocolo, grupoAlterado, campoAlterado, valorAlterado, nroItemAlterado, condicaoUso);
             } catch (Exception e) {
-                logs = e.getMessage();
+                logs = "ERRO: " + e.getMessage();
             }
         } else {
-            logs = "Favor, verificar as informações fornecidas - chave: " + chaveAcesso + " protocolo: " + numeroProtocolo + " motivo: " + motivo + " grupo alterado: " + grupoAlterado + " campo alterado: " + campoAlterado + " valor alterado: " + valorAlterado + " número item alterado: " + nroItemAlterado + " condição uso: " + condicaoUso;
+            logs = "Favor, verificar as informações fornecidas - chave: " + chaveAcesso + " protocolo: " + numeroProtocolo + " grupo alterado: " + grupoAlterado + " campo alterado: " + campoAlterado + " valor alterado: " + valorAlterado + " número item alterado: " + nroItemAlterado + " condição uso: " + condicaoUso;
         }
         return logs;
     }

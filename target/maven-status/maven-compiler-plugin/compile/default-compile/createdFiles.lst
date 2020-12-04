@@ -6,8 +6,6 @@ app\notafiscal\NFeConfiguracao.class
 app\notafiscal\NfeApi$1.class
 app\notafiscal\GerarCadeia.class
 app\notafiscal\CTeAPI.class
-CTeTestService.class
-CTeTest.class
 app\notafiscal\NfeApi.class
 app\notafiscal\MDfeConfiguracao.class
 app\notafiscal\MDFeAPI$1.class
