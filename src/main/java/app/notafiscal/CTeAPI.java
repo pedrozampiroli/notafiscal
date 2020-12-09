@@ -234,6 +234,7 @@ public class CTeAPI {
         for (String s : xml) {
             //converte para UTF-8 e adiciona a lista 'value'
             value.add(new String(s.getBytes(StandardCharsets.UTF_8)));
+            System.out.println("JAVA XML sem assinar: " + s.toString());
         }
         //Cria uma lista do objeto CTeNota e define como um novo Array
         List<CTeNota> cte = new ArrayList<>();
@@ -244,6 +245,10 @@ public class CTeAPI {
             cte.add(c);
         } catch (Exception e) {
             logs = "Erro na conversão de CTe para objeto: " + e.getMessage();
+            System.out.println("-------------------------------------------------------------------------------------------");
+            System.out.println("JAVA erro de schema xml " + logs);
+            System.out.println("-------------------------------------------------------------------------------------------");
+            return logs;
         }
         //Instancia um objeto de lote de CTe para envio
         CTeEnvioLote LoteEnvio = new CTeEnvioLote();
@@ -261,6 +266,7 @@ public class CTeAPI {
             //Grava em 'logs' os dados a serem informados ao usuário (Lote Assinado e Retorno da receita)
             logs = cteEnvioLoteRetornoDados.getLoteAssinado().toString() + ";" + cteEnvioLoteRetornoDados.getRetorno().toString();
         } catch (Exception e) {
+            System.out.println(LoteEnvio.toString());
             logs = "error na transmissão do lote de CTe: " + e.getMessage();
         }
         return logs;
