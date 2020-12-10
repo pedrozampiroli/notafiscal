@@ -9,7 +9,7 @@ public class CTeTest {
 
         api.configurar(
                 "Marilda018",
-                "changeit",
+                "",
                 "D:\\Certificado\\j.pfx",
                 "D:\\Certificado\\homologacao.cacerts",
                 "PR",

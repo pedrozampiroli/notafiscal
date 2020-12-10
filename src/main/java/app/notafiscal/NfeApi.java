@@ -395,15 +395,24 @@ public class NfeApi {
 			try {
 				value = new String(XML.getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e2) {
-				// TODO Auto-generated catch block
 				xmlretorno = "Error: " + e2.getMessage();
 			}
 			NFNota notaRecuperadaAssinada = null;
-
+			boolean nfExport = false;
 			try {
 				notaRecuperadaAssinada = new DFPersister().read(NFNota.class, value);
+				if(notaRecuperadaAssinada.getInfo().getExportacao().getUfEmbarqueProduto() != null) {
+					System.out.println("Nota exportação");
+					if(notaRecuperadaAssinada.getInfo().getDestinatario().getIdEstrangeiro() == null){
+						System.out.println("Sem idEstrangeiro");
+						notaRecuperadaAssinada.getInfo().getDestinatario().setIdEstrangeiro("");
+					} else {
+						System.out.println("Tem idEstrangeiro");
+					}
+				}
+
+				System.out.println("XML " + notaRecuperadaAssinada.toString());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				xmlretorno = "Error: " + e1.getMessage();
 			}
 
@@ -429,6 +438,7 @@ public class NfeApi {
 	        lote.setIndicadorProcessamento(modoprocessamento);
 
 	        if (xmlretorno == null) {
+	        	System.out.println("XML retorno diferente de null");
 				try {
 					LoteEnvioRetornoDados = new WSFacade(config).enviaLote(lote);
 					xmlretorno = LoteEnvioRetornoDados.getRetorno().toString();

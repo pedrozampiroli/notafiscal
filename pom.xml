@@ -18,8 +18,9 @@
         <junit.version>4.12</junit.version>
         <!-- <commons-lang3.version>3.7</commons-lang3.version> -->
         <java.version>1.8</java.version>
-        <latest.release>3.0.25</latest.release>
+        <latest.release>3.0.28</latest.release>
         <simple-xml.version>2.7.1</simple-xml.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -40,11 +41,21 @@
             <systemPath>${project.basedir}/package/notafiscal_core.jar</systemPath>
         </dependency>
 
+
+        <!--
         <dependency>
             <groupId>com.github.wmixvideo</groupId>
             <artifactId>nfe</artifactId>
             <version>${latest.release}</version>
         </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
 
         <!-- Simple Xml Framework -->
         <dependency>

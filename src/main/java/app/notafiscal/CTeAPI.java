@@ -234,7 +234,6 @@ public class CTeAPI {
         for (String s : xml) {
             //converte para UTF-8 e adiciona a lista 'value'
             value.add(new String(s.getBytes(StandardCharsets.UTF_8)));
-            System.out.println("JAVA XML sem assinar: " + s.toString());
         }
         //Cria uma lista do objeto CTeNota e define como um novo Array
         List<CTeNota> cte = new ArrayList<>();
@@ -245,9 +244,7 @@ public class CTeAPI {
             cte.add(c);
         } catch (Exception e) {
             logs = "Erro na conversão de CTe para objeto: " + e.getMessage();
-            System.out.println("-------------------------------------------------------------------------------------------");
-            System.out.println("JAVA erro de schema xml " + logs);
-            System.out.println("-------------------------------------------------------------------------------------------");
+            System.out.println("Java error" + logs);
             return logs;
         }
         //Instancia um objeto de lote de CTe para envio
@@ -259,6 +256,7 @@ public class CTeAPI {
             LoteEnvio.setNota(cte);
         } catch (Exception e) {
             logs = "Erro na criação de lote: " + e.getMessage();
+            System.out.println("Java error" + logs);
         }
         try {
             //Tenta realizar a transmissão do objeto de lote a receita
@@ -266,8 +264,8 @@ public class CTeAPI {
             //Grava em 'logs' os dados a serem informados ao usuário (Lote Assinado e Retorno da receita)
             logs = cteEnvioLoteRetornoDados.getLoteAssinado().toString() + ";" + cteEnvioLoteRetornoDados.getRetorno().toString();
         } catch (Exception e) {
-            System.out.println(LoteEnvio.toString());
             logs = "error na transmissão do lote de CTe: " + e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -299,6 +297,7 @@ public class CTeAPI {
             logs = cteStatusServiceRetorno.getMotivo() + " " + cteStatusServiceRetorno.getCodigoStatus();
         } catch (Exception e) {
             logs = e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -309,6 +308,7 @@ public class CTeAPI {
             logs = cteStatusServiceRetorno.getCodigoStatus();
         } catch (Exception e) {
             logs = e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -319,6 +319,7 @@ public class CTeAPI {
             logs = cteEnvioLoteRetornoDados;
         } catch (Exception e) {
             logs = e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -329,6 +330,7 @@ public class CTeAPI {
             logs = cTeNotaConsultaRetorno;
         } catch (Exception e) {
             logs = e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -339,6 +341,7 @@ public class CTeAPI {
                 logs = new WSFacade(config).correcaoCteString(chaveAcesso, numeroProtocolo, grupoAlterado, campoAlterado, valorAlterado, nroItemAlterado, condicaoUso);
             } catch (Exception e) {
                 logs = "ERRO: " + e.getMessage();
+                System.out.println("Java error" + logs);
             }
         } else {
             logs = "Favor, verificar as informações fornecidas - chave: " + chaveAcesso + " protocolo: " + numeroProtocolo + " grupo alterado: " + grupoAlterado + " campo alterado: " + campoAlterado + " valor alterado: " + valorAlterado + " número item alterado: " + nroItemAlterado + " condição uso: " + condicaoUso;
@@ -353,6 +356,7 @@ public class CTeAPI {
             logs = cteRetornoCancelamento.getInfoCancelamento().toString();
         } catch (Exception e) {
             logs = "Error" + e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }
@@ -389,6 +393,7 @@ public class CTeAPI {
             logs = chave.getChaveAcesso();
         } catch (Exception e) {
             logs = "Erro: " + e.getMessage();
+            System.out.println("Java error" + logs);
         }
         return logs;
     }

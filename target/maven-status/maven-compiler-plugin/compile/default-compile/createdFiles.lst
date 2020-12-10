@@ -4,6 +4,7 @@ app\notafiscal\GnreAPI.class
 GnreTest.class
 app\notafiscal\NFeConfiguracao.class
 app\notafiscal\NfeApi$1.class
+NFeTeste.class
 app\notafiscal\GerarCadeia.class
 app\notafiscal\CTeAPI.class
 CTeTest.class
