@@ -270,12 +270,12 @@ public class CTeAPI {
         return logs;
     }
 
-    public String inutilizar(String chaveAcesso, String numeroProtocolo, String justificativa, String ano, String cteInit, String cteFinal, String mod, String serie) {
+    public String inutilizar(String chaveAcesso, String justificativa, String ano, String cteInit, String cteFinal, String mod, String serie) {
         final CTChaveParser ctChaveParser = new CTChaveParser(chaveAcesso);
         String id = "ID" + ctChaveParser.getNFUnidadeFederativa().getCodigoIbge() + ctChaveParser.getCnpjEmitente() + mod + serie + cteInit + cteFinal;
         String xServ = "INUTILIZAR";
         try {
-            logs = new WSFacade(config).inutilizaCte(id, chaveAcesso, numeroProtocolo, xServ, cteInit, cteFinal, justificativa, ano, mod, serie);
+            logs = new WSFacade(config).inutilizaCte(id, chaveAcesso, xServ, cteInit, cteFinal, justificativa, ano, mod, serie);
         } catch (Exception e) {
             logs = "Error: " + e.getMessage();
         }

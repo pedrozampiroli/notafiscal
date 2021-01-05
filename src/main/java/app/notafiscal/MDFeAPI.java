@@ -257,7 +257,6 @@ public class MDFeAPI {
 		try {
 			value = new String(xml.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e2) {
-			// TODO Auto-generated catch block
 		      System.out.println(e2.getMessage());
 		}
 
