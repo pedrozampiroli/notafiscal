@@ -174,7 +174,7 @@ public class NfeApi {
             sCodigoSegurancaContribuinteID = 0;
         }
 	    
-	    /*
+        /*
 	    System.out.println("____________________________________ Configuração NF ____________________________________");
 	    System.out.println("-------------------------------------- Certificado --------------------------------------");
 	    System.out.println(CaminhoCertificado);
@@ -187,8 +187,7 @@ public class NfeApi {
 	    System.out.println(BuscaAmbiente(Ambiente));
 	    System.out.println(Versao);
 	    System.out.println("_________________________________________________________________________________________");
-	    */
-
+        */
     }
 
     public String NfConsultaCNPJ(String cnpj, String unidadefederativa) {
@@ -330,8 +329,7 @@ public class NfeApi {
     }
 
     public String NfSituacaoNota(String chave, String xml) {
-        System.out.println("-----------------------------------------------------------------------------------------");
-        System.out.println("Chave: " + chave + " -- XML: " + xml);
+        //System.out.println("-----------------------------------------------------------------------------------------");
         NFNota notaRecuperadaAssinada = null;
         NFNotaConsultaRetorno notaRetorno = null;
 
@@ -346,7 +344,7 @@ public class NfeApi {
             notaProcessada.setProtocolo(notaRetorno.getProtocolo());
             notaProcessada.setNota(notaRecuperadaAssinada);
 
-            System.out.println("-----------------------------------------------------------------------------------------");
+            //System.out.println("-----------------------------------------------------------------------------------------");
             return notaProcessada.toString();
 
         } catch (KeyManagementException e) {
@@ -375,8 +373,7 @@ public class NfeApi {
     }
 
     public String NfSituacaoNotaXfd(String chave, String xml) {
-        System.out.println("-----------------------------------------------------------------------------------------");
-        System.out.println("Chave: " + chave + " -- XML: " + xml);
+        //System.out.println("-----------------------------------------------------------------------------------------");
         NFLoteEnvio notaRecuperadaAssinada = null;
         NFNotaConsultaRetorno notaRetorno = null;
         NFNota notaFiscal = null;
@@ -394,7 +391,7 @@ public class NfeApi {
             notaProcessada.setVersao(new BigDecimal(config.getVersao()));
             notaProcessada.setProtocolo(notaRetorno.getProtocolo());
             notaProcessada.setNota(notaFiscal);
-            System.out.println("-----------------------------------------------------------------------------------------");
+            //System.out.println("-----------------------------------------------------------------------------------------");
             return notaProcessada.toString();
 
         } catch (Exception e) {
