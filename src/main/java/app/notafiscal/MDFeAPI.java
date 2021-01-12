@@ -365,6 +365,15 @@ public class MDFeAPI {
 		return logs;
 	}
 
+	public String incluirCondutor(String chave, String nomeCondutor, String cpfCondutor, String sequenciaEvento) {
+		try {
+			MDFeRetorno mdfEnvioLoteRetornoDados = new WSFacade(config).incluirCondutor(chave,nomeCondutor,cpfCondutor,sequenciaEvento);
+			logs = mdfEnvioLoteRetornoDados.getEventoRetorno().toString();
+		} catch (Exception e) {
+			logs = e.getMessage();
+		}
+		return logs;
+	}
 
 }
 
