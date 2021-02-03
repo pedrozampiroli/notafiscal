@@ -418,18 +418,15 @@ public class NfeApi {
         try {
             value = new String(XML.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e2) {
+            // TODO Auto-generated catch block
             xmlretorno = "Error: " + e2.getMessage();
         }
         NFNota notaRecuperadaAssinada = null;
 
         try {
-            notaRecuperadaAssinada = new DFPersister().read(NFNota.class, new String(value.getBytes("UTF-8")));
-            if (notaRecuperadaAssinada.getInfo().getExportacao().getUfEmbarqueProduto() != null) {
-                if (notaRecuperadaAssinada.getInfo().getDestinatario().getIdEstrangeiro() == null) {
-                    notaRecuperadaAssinada.getInfo().getDestinatario().setIdEstrangeiro("");
-                }
-            }
+            notaRecuperadaAssinada = new DFPersister().read(NFNota.class, value);
         } catch (Exception e1) {
+            // TODO Auto-generated catch block
             xmlretorno = "Error: " + e1.getMessage();
         }
 
@@ -445,6 +442,8 @@ public class NfeApi {
         if (LoteID.length() > 1) {
 
             String loteid = LoteID.replaceAll("\\s+", " ");
+            System.out.println(loteid);
+
             StringValidador.tamanho15N(loteid, "ID do Lote");
             lote.setIdLote(LoteID);
         }
@@ -659,35 +658,24 @@ public class NfeApi {
 
     public String NfCorrigirNota(String chaveDeAcessoDaNota, String textoCorrecao, int sequencialEventoDaNota) {
 
+        System.out.println("--------------------------------- CARTA DE CORREÇÃO NFe ---------------------------------");
+
         NFEnviaEventoRetorno nfenviaeventoretorno = null;
+        String xmlEnvio = null;
+        String retorno;
         try {
-            nfenviaeventoretorno = new WSFacade(config).corrigeNota(chaveDeAcessoDaNota, textoCorrecao, sequencialEventoDaNota);
-
+            //nfenviaeventoretorno = new WSFacade(config).corrigeNota(chaveDeAcessoDaNota, textoCorrecao, sequencialEventoDaNota);
+            xmlEnvio = new WSFacade(config).geraXMLCorrecaoAssinado(chaveDeAcessoDaNota, textoCorrecao, sequencialEventoDaNota);
+            nfenviaeventoretorno = new WSFacade(config).corrigeNotaAssinada(xmlEnvio);
+            retorno = xmlEnvio + "|" + nfenviaeventoretorno.toString();
             //corrigeNota(chaveDeAcessoDaNota, textoCorrecao, sequencialEventoDaNota);
-        } catch (KeyManagementException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            retorno = e.getMessage();
         }
+        System.out.println(retorno);
+        System.out.println("-----------------------------------------------------------------------------------------");
 
-        return nfenviaeventoretorno.toString();
+        return retorno;
     }
 
     public String NFInutilizarXML(String xmlassinado, String modelo) {
