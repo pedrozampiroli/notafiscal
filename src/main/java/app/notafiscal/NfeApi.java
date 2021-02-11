@@ -23,6 +23,10 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
+import com.fincatto.documentofiscal.nfe.NFTipoEmissao;
+import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCode20;
+import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeContingenciaOffline20;
+import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeEmissaoNormal20;
 import com.fincatto.documentofiscal.utils.DFPersister;
 import org.apache.commons.io.FileUtils;
 
@@ -855,6 +859,46 @@ public class NfeApi {
 
         return null;
 
+    }
+
+    public String NFCeGerarLinkQRcode(String XML) {
+        XML = XML.replaceAll("\r", "");
+        XML = XML.replaceAll("\t", "");
+        XML = XML.replaceAll("\n", "");
+        XML = XML.replaceAll("\n", "");
+        XML = XML.replaceAll("&lt;", "<");
+        XML = XML.replaceAll("&gt;", ">");
+        String value = null;
+        xmlretorno = null;
+        try {
+            value = new String(XML.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e2) {
+            xmlretorno = "Error na conversão do xml para UTF-8: " + e2.getMessage();
+        }
+        NFNota nota = null;
+        try {
+            nota = new DFPersister().read(NFNota.class, value);
+        } catch (Exception e1) {
+            xmlretorno = "Error ao converter dados da NF: " + e1.getMessage();
+        }
+        NFGeraQRCode20 geraQRCode = getNfGeraQRCode20(nota);
+        try {
+            xmlretorno = "<![CDATA[" + geraQRCode.getQRCode() + "]]>;" + geraQRCode.urlConsultaChaveAcesso();
+        } catch (Exception e) {
+            xmlretorno = "Erro ao retornar dados do QR Code " + e;
+        }
+
+        return xmlretorno;
+    }
+
+    private NFGeraQRCode20 getNfGeraQRCode20(NFNota nota) {
+        if (NFTipoEmissao.EMISSAO_NORMAL.equals(nota.getInfo().getIdentificacao().getTipoEmissao())) {
+            return new NFGeraQRCodeEmissaoNormal20(nota, this.config);
+        } else if (NFTipoEmissao.CONTIGENCIA_OFFLINE.equals(nota.getInfo().getIdentificacao().getTipoEmissao())) {
+            return new NFGeraQRCodeContingenciaOffline20(nota, this.config);
+        } else {
+            throw new IllegalArgumentException("QRCode 2.0 Tipo Emissao nao implementado: " + nota.getInfo().getIdentificacao().getTipoEmissao().getDescricao());
+        }
     }
 
     private DFUnidadeFederativa BuscaUnidadeFederativa(String UF) {

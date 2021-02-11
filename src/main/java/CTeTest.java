@@ -188,7 +188,7 @@ public class CTeTest {
                 "<qrCodCTe><![CDATA[http://www.fazenda.pr.gov.br/cte/qrcode?chCTe=41201218374429000104570010000022141120022140&tpAmb=2]]></qrCodCTe>\n" +
                 "</infCTeSupl>\n" +
                 "</CTe>";
-
+        System.out.println(xml);
         String response;
 
         try {
