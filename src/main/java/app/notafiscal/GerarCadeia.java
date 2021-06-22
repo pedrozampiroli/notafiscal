@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.utils.DFCadeiaCertificados;
+import br.com.tegasistemas.documentofiscal.DFAmbiente;
+import br.com.tegasistemas.documentofiscal.utils.DFCadeiaCertificados;
 
 public class GerarCadeia {
 

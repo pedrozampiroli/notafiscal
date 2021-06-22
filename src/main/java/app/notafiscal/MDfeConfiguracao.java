@@ -1,8 +1,8 @@
 package app.notafiscal;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.mdfe3.MDFeConfig;
+import br.com.tegasistemas.documentofiscal.DFAmbiente;
+import br.com.tegasistemas.documentofiscal.DFUnidadeFederativa;
+import br.com.tegasistemas.documentofiscal.mdfe3.MDFeConfig;
 
 import java.io.FileInputStream;
 import java.io.IOException;

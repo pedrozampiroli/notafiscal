@@ -9,8 +9,8 @@ public class CTeTest {
 
         api.configurar(
                 "Marilda018",
-                "",
-                "D:\\Certificado\\j.pfx",
+                "changeit",
+                "D:\\Certificado\\vitorinoMarilda018.pfx",
                 "D:\\Certificado\\homologacao.cacerts",
                 "PR",
                 "2"
@@ -193,7 +193,7 @@ public class CTeTest {
 
         try {
             //ok
-            response = api.transmitir("1", "3.00", xml);
+            //response = api.transmitir("1", "3.00", xml);
             //ok
 //            response = api.inutilizar("41201118374429000104570010000022121110022123","141200000056993","TESTE TESTE TESTE TESTE","20", "000002213","000002213", "57","001");
             //ok
@@ -210,7 +210,7 @@ public class CTeTest {
             //ok
             //response = api.geraQrCode(xml);
             //ok
-            //response = api.consultaStatusServicoCod("PR");
+            response = api.consultaStatusServicoCod("PR");
             //error
             //response = api.consultar("41201124476580000156570010000275041000375668");
             //error

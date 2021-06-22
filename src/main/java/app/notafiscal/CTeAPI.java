@@ -1,24 +1,28 @@
 package app.notafiscal;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.cte300.CTeConfig;
-import com.fincatto.documentofiscal.cte300.classes.CTTipoEmissao;
-import com.fincatto.documentofiscal.cte300.classes.consultastatusservico.CTeConsStatServRet;
-import com.fincatto.documentofiscal.cte300.classes.enviolote.CTeEnvioLote;
-import com.fincatto.documentofiscal.cte300.classes.enviolote.CTeEnvioLoteRetornoDados;
-import com.fincatto.documentofiscal.cte300.classes.enviolote.consulta.CTeConsultaRecLoteRet;
-import com.fincatto.documentofiscal.cte300.classes.evento.cancelamento.CTeRetornoCancelamento;
-import com.fincatto.documentofiscal.cte300.classes.nota.CTeNota;
-import com.fincatto.documentofiscal.cte300.parsers.CTChaveParser;
-import com.fincatto.documentofiscal.cte300.utils.CTeGeraChave;
-import com.fincatto.documentofiscal.cte300.utils.CTeGeraQRCode;
-import com.fincatto.documentofiscal.cte300.webservices.WSFacade;
-import com.fincatto.documentofiscal.utils.DFPersister;
+import br.com.tegasistemas.documentofiscal.DFAmbiente;
+import br.com.tegasistemas.documentofiscal.DFUnidadeFederativa;
+import br.com.tegasistemas.documentofiscal.cte300.CTeConfig;
+import br.com.tegasistemas.documentofiscal.cte300.classes.CTTipoEmissao;
+import br.com.tegasistemas.documentofiscal.cte300.classes.consultastatusservico.CTeConsStatServRet;
+import br.com.tegasistemas.documentofiscal.cte300.classes.enviolote.CTeEnvioLote;
+import br.com.tegasistemas.documentofiscal.cte300.classes.enviolote.CTeEnvioLoteRetornoDados;
+import br.com.tegasistemas.documentofiscal.cte300.classes.enviolote.consulta.CTeConsultaRecLoteRet;
+import br.com.tegasistemas.documentofiscal.cte300.classes.evento.cancelamento.CTeRetornoCancelamento;
+import br.com.tegasistemas.documentofiscal.cte300.classes.nota.CTeNota;
+import br.com.tegasistemas.documentofiscal.cte300.classes.nota.CTeProcessado;
+import br.com.tegasistemas.documentofiscal.cte300.classes.nota.consulta.CTeNotaConsultaRetorno;
+import br.com.tegasistemas.documentofiscal.cte300.parsers.CTChaveParser;
+import br.com.tegasistemas.documentofiscal.cte300.utils.CTeGeraChave;
+import br.com.tegasistemas.documentofiscal.cte300.utils.CTeGeraQRCode;
+import br.com.tegasistemas.documentofiscal.cte300.webservices.WSFacade;
+import br.com.tegasistemas.documentofiscal.utils.DFAssinaturaDigital;
+import br.com.tegasistemas.documentofiscal.utils.DFPersister;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -319,7 +323,28 @@ public class CTeAPI {
             logs = cteEnvioLoteRetornoDados;
         } catch (Exception e) {
             logs = e.getMessage();
-            System.out.println("Java error" + logs);
+            System.out.println("Erro NotaFiscalAPI (Consulta CTe) -> " + logs);
+        }
+        return logs;
+    }
+
+    public String consultarSituacao(String chave, String xml) {
+        CTeNota cteRecuperado = null;
+        CTeNotaConsultaRetorno retorno = null;
+        try {
+            retorno = new WSFacade(config).consultaNota(chave);
+            cteRecuperado = new DFPersister().read(CTeNota.class, xml);
+            CTeProcessado cte = new CTeProcessado();
+            cte.setVersao("3.00");
+            cte.setCte(cteRecuperado);
+            cte.setProtocolo(retorno.getProtocolo());
+            String xmlproc = cte.toString();
+            String procCte = new DFAssinaturaDigital(this.config).assinarDocumento(xmlproc);
+            logs = procCte;
+            System.out.println("XML....: " + xmlproc);
+            System.out.println("ProcCTE: " + procCte);
+        } catch (Exception e) {
+            logs = e.getMessage();
         }
         return logs;
     }

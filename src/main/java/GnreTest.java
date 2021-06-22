@@ -1,42 +1,43 @@
-import app.notafiscal.GnreAPI;
-
-public class GnreTest {
-
-    public static void main(String[] args) throws Exception {
-        String logs;
-        GnreAPI api = new GnreAPI();
-        logs = api.configurar("@cafe@","changeit","D:\\Projects\\certificados\\1.pfx","D:\\Projects\\certificados\\producao.cacerts","PR","100013");
-        logs = api.transmitir(
-                "PR",
-                "121321321",
-                "100013",
-                "07038710000150",
-                "10",
-                "1314834209",
-                "1.00",
-                "2020-12-01",
-                "EMITENTE TESTE",
-                "ENDERECO EMITENTE TESTE",
-                "06200",
-                "MG",
-                "38540970",
-                "2020-11-19",
-                "439999999",
-                "2312312",
-                "",
-                "10",
-                "2020",
-                "",
-                "1.00",
-                "1",
-                "123456",
-                "19278207000150",
-                "",
-                "123456",
-                "123",
-                "Razao TESTE",
-                "06200"
-        );
-        System.out.println(logs);
-    }
-}
+//import app.notafiscal.GnreAPI;
+//
+//public class GnreTest {
+//
+//    public static void main(String[] args) throws Exception {
+//        String logs;
+//        logs = "<nfeProc versao=\"4.00\" xmlns=\"http://www.portalfiscal.inf.br/nfe\"><NFe><infNFe Id=\"NFe41210506276902000565550060000461011050461015\" versao=\"4.00\"><ide><cUF>41</cUF><cNF>05046101</cNF><natOp>VENDAS PRODUCAO DO ESTABELECIMENTO PARA CONSUMIDOR</natOp><mod>55</mod><serie>6</serie><nNF>46101</nNF><dhEmi>2021-05-03T16:38:45-03:00</dhEmi><dhSaiEnt>2021-05-03T16:38:45-03:00</dhSaiEnt><tpNF>1</tpNF><idDest>2</idDest><cMunFG>4101507</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>5</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><indFinal>1</indFinal><indPres>0</indPres><procEmi>0</procEmi><verProc>4.01</verProc></ide><emit><CNPJ>06276902000565</CNPJ><xNome>027 SMP - IND. COMERCIO MOVEIS LTDA</xNome><xFant>SMP - IND. COMERCIO MOVEIS LTDA</xFant><enderEmit><xLgr>RUA JURUTAU</xLgr><nro>1731</nro><xBairro>CENTRO PARQUE INDUSTRIAL II</xBairro><cMun>4101507</cMun><xMun>ARAPONGAS</xMun><UF>PR</UF><CEP>86703070</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>4331728150</fone></enderEmit><IE>9058129981</IE><CRT>3</CRT></emit><dest><CPF>14176749890</CPF><xNome>MARCOS VELLANI</xNome><enderDest><xLgr>Rua Maria Raimunda</xLgr><nro>87</nro><xBairro>Vila Aparecida</xBairro><cMun>3522406</cMun><xMun>ITAPEVA</xMun><UF>SP</UF><CEP>18401010</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>33025000</fone></enderDest><indIEDest>9</indIEDest><email>e-commerce@smp.ind.br</email></dest><det nItem=\"1\"><prod><cProd>2000931318</cProd><cEAN>7899512563874</cEAN><xProd>POLTRONA KARINA 1 LUG TE-1318/SUED AMASSADO BEGE</xProd><NCM>94016100</NCM><CFOP>6107</CFOP><uCom>CJ</uCom><qCom>1.0000</qCom><vUnCom>199.9080000000</vUnCom><vProd>199.91</vProd><cEANTrib>7899512563874</cEANTrib><uTrib>CJ</uTrib><qTrib>1.0000</qTrib><vUnTrib>199.9080000000</vUnTrib><indTot>1</indTot><nItemPed>1318</nItemPed></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>209.91</vBC><pICMS>12.00</pICMS><vICMS>25.19</vICMS></ICMS00></ICMS><IPI><CNPJProd>00000000000000</CNPJProd><cSelo>N</cSelo><qSelo>0</qSelo><cEnq>999</cEnq><IPITrib><CST>50</CST><vBC>199.91</vBC><pIPI>5.00</pIPI><vIPI>10.00</vIPI></IPITrib></IPI><II><vBC>0.00</vBC><vDespAdu>0.00</vDespAdu><vII>0.00</vII><vIOF>0.00</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>199.91</vBC><pPIS>1.65</pPIS><vPIS>3.30</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>199.91</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>15.19</vCOFINS></COFINSAliq></COFINS><ICMSUFDest><vBCUFDest>209.91</vBCUFDest><vBCFCPUFDest>209.91</vBCFCPUFDest><pFCPUFDest>0.00</pFCPUFDest><pICMSUFDest>12.00</pICMSUFDest><pICMSInter>12.00</pICMSInter><pICMSInterPart>100.00</pICMSInterPart><vFCPUFDest>0.00</vFCPUFDest><vICMSUFDest>0.00</vICMSUFDest><vICMSUFRemet>0.00</vICMSUFRemet></ICMSUFDest></imposto></det><total><ICMSTot><vBC>209.91</vBC><vICMS>25.19</vICMS><vICMSDeson>0.00</vICMSDeson><vFCPUFDest>0</vFCPUFDest><vICMSUFDest>0</vICMSUFDest><vICMSUFRemet>0</vICMSUFRemet><vFCP>0</vFCP><vBCST>0.00</vBCST><vST>0.00</vST><vFCPST>0</vFCPST><vFCPSTRet>0</vFCPSTRet><vProd>199.91</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>10.00</vIPI><vIPIDevol>0</vIPIDevol><vPIS>3.30</vPIS><vCOFINS>15.19</vCOFINS><vOutro>0.00</vOutro><vNF>209.91</vNF></ICMSTot></total><transp><modFrete>0</modFrete><transporta><CNPJ>10642884000484</CNPJ><xNome>PRIME EXPRESS LOGISTICA E TRANSPORTE LTDA</xNome><IE>388094124110</IE><xEnder>R LINO PEIXOTO AMORIM,1250</xEnder><xMun>ITUPEVA</xMun><UF>SP</UF></transporta><vol><qVol>1</qVol><esp>VOLUME</esp><pesoL>14.000</pesoL><pesoB>15.000</pesoB></vol></transp><cobr><fat><nFat>46101</nFat><vOrig>209.91</vOrig><vLiq>209.91</vLiq></fat><dup><nDup>001</nDup><dVenc>2021-05-06</dVenc><vDup>209.91</vDup></dup></cobr><pag><detPag><tPag>14</tPag><vPag>209.91</vPag></detPag></pag><infAdic><infCpl>REPRES. 1142TONINHO CARGA 70059 ENTREGA 1A PEDIDO 119081 Valores Tributos: Vlr.ICMS R$25.19 Vlr.IPI R$10.00 Vlr.PIS R$3.30 Vlr.COFINS R$15.19</infCpl></infAdic><infRespTec><CNPJ>04329365000115</CNPJ><xContato>Leandro Penha</xContato><email>leandropenha@wvetro.com.br</email><fone>4331724200</fone><idCSRT>99</idCSRT><hashCSRT>YWFhYWFhYWFhYWFhYWFhYWFhYWE=</hashCSRT></infRespTec></infNFe><Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><Reference URI=\"#NFe41210506276902000565550060000461011050461015\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/><Transform Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><DigestValue>JPp4/auRizz6ejTSGfYS/JmaIeg=</DigestValue></Reference></SignedInfo><SignatureValue>hLOAr0sHPVlQRA73ox3U4ZizGr9JX3LbFNLduzVHbDDUen2y+J4epAb2bqWd3vY5EZR3umgnitgF virw6Aj19L/fRc1DTIaLgbWzyjPLeXX6Xt/yvOQ2LszjRbKOmtAdFF970Ug/yHx13deiqBs5mq5a ZVKB/R3rq6THaeUjOpVAcv2F9L1r9o+A8e9MEXCwDtetoTG3vXcDNf0yj67VpwqdNZJKADPEyglF TdmPBMSmyADoQwsL6g+KvhXLgpZWT4jpLqDtrRMuiW2HUNdBTQWXSK+Qs30tPLIBEzTIvUCrEb6N 3ZrTfEB/qKBSxZ5ZDHP3dL4CMYhPguwi549Ksw==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIIIDCCBgigAwIBAgIIarnb0FmzLVwwDQYJKoZIhvcNAQELBQAwdTELMAkGA1UEBhMCQlIxEzAR BgNVBAoMCklDUC1CcmFzaWwxNjA0BgNVBAsMLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFs IGRvIEJyYXNpbCAtIFJGQjEZMBcGA1UEAwwQQUMgU0VSQVNBIFJGQiB2NTAeFw0yMDEwMDcxOTAx MDBaFw0yMTEwMDcxOTAxMDBaMIIBNzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlBSMRIwEAYDVQQH DAlBUkFQT05HQVMxEzARBgNVBAoMCklDUC1CcmFzaWwxGDAWBgNVBAsMDzAwMDAwMTAwOTg2NTEz NjE2MDQGA1UECwwtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZC MRYwFAYDVQQLDA1SRkIgZS1DTlBKIEExMRkwFwYDVQQLDBBBQyBTRVJBU0EgUkZCIHY1MRcwFQYD VQQLDA4yNzA4MzM2NTAwMDE4MzETMBEGA1UECwwKUFJFU0VOQ0lBTDE/MD0GA1UEAww2U01QIElO RFVTVFJJQSBFIENPTUVSQ0lPIERFIE1PVkVJUyBMVERBOjA2Mjc2OTAyMDAwNTY1MIIBIjANBgkq hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvn3njXCatfqOrbLekj+9cV7J5LzIYGOF+z6W1ODf3inN +5d3uEGIOv/ntxx9bNbPCNY0p3TynUDsVlL4wnWXsXVRNOF97+3JtZ6rOTQo6MIAWnswHT+SZY2k j/flFGaF0/UAEvqVoqfjXwtmMN+UN8REyFRdQxPnnOkA+vQ0zC7r19pTEFeoKubssV1ulIF61hTb A/QBFmC95CEt6bQsUDne67L9nQud9/HRhowRLSMnpI1m9JI80t8W8iLQoq/H0wPNBVT7Sj8BXPf0 wEbbArERx8ezZMmsYZSS90rDTGXa1skRgn9QYtR+ekCrTSwxvxoa6OYIGrThw2cAjqNAcQIDAQAB o4IC7jCCAuowCQYDVR0TBAIwADAfBgNVHSMEGDAWgBTs8UFRV6jmOules6Ai+QiKtTqHjzCBmQYI KwYBBQUHAQEEgYwwgYkwSAYIKwYBBQUHMAKGPGh0dHA6Ly93d3cuY2VydGlmaWNhZG9kaWdpdGFs LmNvbS5ici9jYWRlaWFzL3NlcmFzYXJmYnY1LnA3YjA9BggrBgEFBQcwAYYxaHR0cDovL29jc3Au Y2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9zZXJhc2FyZmJ2NTCBvgYDVR0RBIG2MIGzgRlDT05U QUJJTElEQURFMUBBQ0YuQ09NLkJSoCIGBWBMAQMCoBkTF0VVQ0xJREVTIEFOVE9OSU8gUlVGQVRP oBkGBWBMAQMDoBATDjA2Mjc2OTAyMDAwNTY1oD4GBWBMAQMEoDUTMzI2MDYxOTY1NTI3ODgxNDg5 NjgwMDAwMDAwMDAwMDAwMDAwMDAzNTQzNTc0M1NFU1BQUqAXBgVgTAEDB6AOEwwwMDAwMDAwMDAw MDAwcQYDVR0gBGowaDBmBgZgTAECAQ0wXDBaBggrBgEFBQcCARZOaHR0cDovL3B1YmxpY2FjYW8u Y2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9yZXBvc2l0b3Jpby9kcGMvZGVjbGFyYWNhby1yZmIu cGRmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDCBnQYDVR0fBIGVMIGSMEqgSKBGhkRo dHRwOi8vd3d3LmNlcnRpZmljYWRvZGlnaXRhbC5jb20uYnIvcmVwb3NpdG9yaW8vbGNyL3NlcmFz YXJmYnY1LmNybDBEoEKgQIY+aHR0cDovL2xjci5jZXJ0aWZpY2Fkb3MuY29tLmJyL3JlcG9zaXRv cmlvL2xjci9zZXJhc2FyZmJ2NS5jcmwwHQYDVR0OBBYEFM+KspgwtvJCVzcYFHrYBVgBEw4TMA4G A1UdDwEB/wQEAwIF4DANBgkqhkiG9w0BAQsFAAOCAgEAslA5hTjScpmkWQQ76SIPB5TLf86sQCA8 N1UgBkk/bHx+iSbHycjJqEYdj5AEQLPa20svWBcuRRg3sNPi8OTVseHDSQLaG+SbZ45R56LyQuWA 7pSthg14QfAYpAwt7tUfYgTda6PL6Gug+8e9vjiPcIgbfcVJRuMuC8dBD37uCWhPiWxJcRAOQeLE OexzPHo7t9KXGUEReDWxrkor+hb7ZbcT14lyTHivoXVa6ryFR1gtox19dUSmDyhQtqmzM2CKJ8Rf M6l2Q4GaLGf/rgNFp/6b3xhQh1j9muli3c5hQTV3z6bLEXFBvIDeTJWUG+B0b+TXZdjkrYVG6vr/ MVz5LdZqo9pB+GlNXW3c9CngjBJhEcj21J8tN+3RpMGep3EVTD30k6NbCcQp1Dri5Cr2gPkmObwW zU4k27iSQek9GIFZBqoWR0EG5JLSdzvdsDqJ0Y3YTim/XHjMkvpLHvJ4Tpr9S09C3rMhG8ZBuFX5 TeMUnDSZbQoSbu4hob01vdT4QpBaA/Q8ZenhtP140ePpqHc+KLCfAyYTV5nJSn/2RtCTkeUiS1E9 eOf9Gd1sBFPg3cHqlKKouyb87j/xLL+TdwU3K3Cg3enpr/lokvA7LsRMh2C5UrKRqgm+Pmi3EJzA Y3pCATNO7MIYozGKE47j7qzDAOtscsKiBahhCcJnnlg=</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao=\"4.00\"><infProt Id=\"ID141210093858673\"><tpAmb>1</tpAmb><verAplic>PR-v4_7_26</verAplic><chNFe>41210506276902000565550060000461011050461015</chNFe><dhRecbto>2021-05-03T13:48:55-03:00</dhRecbto><nProt>141210093858673</nProt><digVal>R/9bVYXePyEo6rOxkfkVMpLIFpA=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>";
+//        GnreAPI api = new GnreAPI();
+//        //logs = api.configurar("@cafe@","changeit","D:\\Projects\\certificados\\1.pfx","D:\\Projects\\certificados\\producao.cacerts","PR","100013");
+//        logs = api.transmitir(
+//                "PR",
+//                "121321321",
+//                "100013",
+//                "07038710000150",
+//                "10",
+//                "1314834209",
+//                "1.00",
+//                "2020-12-01",
+//                "EMITENTE TESTE",
+//                "ENDERECO EMITENTE TESTE",
+//                "06200",
+//                "MG",
+//                "38540970",
+//                "2020-11-19",
+//                "439999999",
+//                "2312312",
+//                "",
+//                "10",
+//                "2020",
+//                "",
+//                "1.00",
+//                "1",
+//                "123456",
+//                "19278207000150",
+//                "",
+//                "123456",
+//                "123",
+//                "Razao TESTE",
+//                "06200"
+//        );
+//        System.out.println(logs);
+//    }
+//}

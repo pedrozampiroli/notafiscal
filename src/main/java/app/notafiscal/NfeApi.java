@@ -23,35 +23,35 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
-import com.fincatto.documentofiscal.nfe.NFTipoEmissao;
-import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCode20;
-import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeContingenciaOffline20;
-import com.fincatto.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeEmissaoNormal20;
-import com.fincatto.documentofiscal.utils.DFPersister;
+import br.com.tegasistemas.documentofiscal.nfe.NFTipoEmissao;
+import br.com.tegasistemas.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCode20;
+import br.com.tegasistemas.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeContingenciaOffline20;
+import br.com.tegasistemas.documentofiscal.nfe400.utils.qrcode20.NFGeraQRCodeEmissaoNormal20;
+import br.com.tegasistemas.documentofiscal.utils.DFPersister;
 import org.apache.commons.io.FileUtils;
 
-import com.fincatto.documentofiscal.DFAmbiente;
-import com.fincatto.documentofiscal.DFModelo;
-import com.fincatto.documentofiscal.DFUnidadeFederativa;
-import com.fincatto.documentofiscal.nfe.NFeConfig;
-import com.fincatto.documentofiscal.nfe400.classes.cadastro.NFRetornoConsultaCadastro;
-import com.fincatto.documentofiscal.nfe400.classes.evento.NFEnviaEventoRetorno;
-import com.fincatto.documentofiscal.nfe400.classes.lote.consulta.NFLoteConsultaRetorno;
-import com.fincatto.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvio;
-import com.fincatto.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvioRetornoDados;
-import com.fincatto.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvioRetornoDadosNew;
-import com.fincatto.documentofiscal.nfe400.classes.lote.envio.NFLoteIndicadorProcessamento;
-import com.fincatto.documentofiscal.nfe400.classes.nota.NFNota;
-import com.fincatto.documentofiscal.nfe400.classes.nota.NFNotaInfoSuplementar;
-import com.fincatto.documentofiscal.nfe400.classes.nota.NFNotaProcessada;
-import com.fincatto.documentofiscal.nfe400.classes.nota.consulta.NFNotaConsultaRetorno;
-import com.fincatto.documentofiscal.nfe400.classes.statusservico.consulta.NFStatusServicoConsultaRetorno;
-import com.fincatto.documentofiscal.nfe400.utils.NFGeraQRCode;
-import com.fincatto.documentofiscal.nfe400.webservices.WSFacade;
-import com.fincatto.documentofiscal.utils.DFAssinaturaDigital;
-import com.fincatto.documentofiscal.utils.DFCadeiaCertificados;
-import com.fincatto.documentofiscal.validadores.StringValidador;
-import com.fincatto.documentofiscal.validadores.XMLValidador;
+import br.com.tegasistemas.documentofiscal.DFAmbiente;
+import br.com.tegasistemas.documentofiscal.DFModelo;
+import br.com.tegasistemas.documentofiscal.DFUnidadeFederativa;
+import br.com.tegasistemas.documentofiscal.nfe.NFeConfig;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.cadastro.NFRetornoConsultaCadastro;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.evento.NFEnviaEventoRetorno;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.lote.consulta.NFLoteConsultaRetorno;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvio;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvioRetornoDados;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.lote.envio.NFLoteEnvioRetornoDadosNew;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.lote.envio.NFLoteIndicadorProcessamento;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.nota.NFNota;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.nota.NFNotaInfoSuplementar;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.nota.NFNotaProcessada;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.nota.consulta.NFNotaConsultaRetorno;
+import br.com.tegasistemas.documentofiscal.nfe400.classes.statusservico.consulta.NFStatusServicoConsultaRetorno;
+import br.com.tegasistemas.documentofiscal.nfe400.utils.NFGeraQRCode;
+import br.com.tegasistemas.documentofiscal.nfe400.webservices.WSFacade;
+import br.com.tegasistemas.documentofiscal.utils.DFAssinaturaDigital;
+import br.com.tegasistemas.documentofiscal.utils.DFCadeiaCertificados;
+import br.com.tegasistemas.documentofiscal.validadores.StringValidador;
+import br.com.tegasistemas.documentofiscal.validadores.XMLValidador;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -177,21 +177,20 @@ public class NfeApi {
         } catch (NumberFormatException e) {
             sCodigoSegurancaContribuinteID = 0;
         }
-	    
-        /*
-	    System.out.println("____________________________________ Configuração NF ____________________________________");
-	    System.out.println("-------------------------------------- Certificado --------------------------------------");
-	    System.out.println(CaminhoCertificado);
-	    System.out.println(CertificadoSenha);
-	    System.out.println("--------------------------------- Cadeia de Certificado ---------------------------------");
-	    System.out.println(CaminhoCadeiaCertificado);
-	    System.out.println("-------------------------------- Ambiente / Uf / Versão  --------------------------------");
-	    System.out.println(Estado);
-	    System.out.println(BuscaUnidadeFederativa(Estado));
-	    System.out.println(BuscaAmbiente(Ambiente));
-	    System.out.println(Versao);
-	    System.out.println("_________________________________________________________________________________________");
-        */
+
+
+        System.out.println("--------------------------- Certificado ------------------------");
+        System.out.println("Caminho Certificado " + CaminhoCertificado);
+        System.out.println("Senha Certificado   " + CertificadoSenha);
+        System.out.println("---------------------- Cadeia de Certificado -------------------");
+        System.out.println("Path  Cadeia Certificado " + CaminhoCadeiaCertificado);
+        System.out.println("Senha Cadeia Certificado " + CadeiaCertificadoSenha);
+        System.out.println("--------------------- Ambiente / Uf / Versão  ------------------");
+        System.out.println("Estado:     " + Estado);
+        System.out.println("EstadoDesc: " + BuscaUnidadeFederativa(Estado));
+        System.out.println("Ambiente:   " + BuscaAmbiente(Ambiente));
+        System.out.println("Versao:     " + Versao);
+
     }
 
     public String NfConsultaCNPJ(String cnpj, String unidadefederativa) {
@@ -333,7 +332,6 @@ public class NfeApi {
     }
 
     public String NfSituacaoNota(String chave, String xml) {
-        //System.out.println("-----------------------------------------------------------------------------------------");
         NFNota notaRecuperadaAssinada = null;
         NFNotaConsultaRetorno notaRetorno = null;
 
@@ -348,7 +346,6 @@ public class NfeApi {
             notaProcessada.setProtocolo(notaRetorno.getProtocolo());
             notaProcessada.setNota(notaRecuperadaAssinada);
 
-            //System.out.println("-----------------------------------------------------------------------------------------");
             return notaProcessada.toString();
 
         } catch (KeyManagementException e) {
@@ -377,26 +374,33 @@ public class NfeApi {
     }
 
     public String NfSituacaoNotaXfd(String chave, String xml) {
-        //System.out.println("-----------------------------------------------------------------------------------------");
-        NFLoteEnvio notaRecuperadaAssinada = null;
+        //NFNota notaRecuperadaAssinada = null;
         NFNotaConsultaRetorno notaRetorno = null;
-        NFNota notaFiscal = null;
+        br.com.tegasistemas.documentofiscal.nfe400.classes.nota.NFNota notaFiscal = null;
+        System.out.println("----------------------------------- Busca Situação NF -----------------------------------");
+        System.out.println(xml);
 
         try {
 
             notaRetorno = new WSFacade(config).consultaNota(chave);
+            System.out.println("notaRetorno -> " + notaRetorno);
+            //notaRecuperadaAssinada = new DFPersister().read(NFNota.class, xml);
 
-            notaRecuperadaAssinada = new DFPersister().read(NFLoteEnvio.class, xml);
-
-            notaFiscal = new DFPersister().read(NFNota.class, notaRecuperadaAssinada.getNotas().get(0).toString());
+            //notaFiscal = new DFPersister().read(br.com.tegasistemas.documentofiscal.nfe400.classes.nota.NFNota.class, notaRecuperadaAssinada.getNotas().get(0).toString());
 
             NFNotaProcessada notaProcessada = new NFNotaProcessada();
 
             notaProcessada.setVersao(new BigDecimal(config.getVersao()));
             notaProcessada.setProtocolo(notaRetorno.getProtocolo());
             notaProcessada.setNota(notaFiscal);
-            //System.out.println("-----------------------------------------------------------------------------------------");
-            return notaProcessada.toString();
+            System.out.println(notaRetorno.getProtocolo());
+
+            System.out.println("----------------------------------- EFD Corrigido -----------------------------------");
+
+            String auxretorno = "<nfeProc versao=\"4.00\" xmlns=\"http://www.portalfiscal.inf.br/nfe\">" + xml + notaRetorno.getProtocolo() + "</nfeProc>";
+            String retorno = new DFAssinaturaDigital(this.config).assinarDocumento(auxretorno);
+            System.out.println("-----------------------------------------------------------------------------------------");
+            return retorno;
 
         } catch (Exception e) {
             return e.getMessage();
@@ -422,7 +426,6 @@ public class NfeApi {
         try {
             value = new String(XML.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e2) {
-            // TODO Auto-generated catch block
             xmlretorno = "Error: " + e2.getMessage();
         }
         NFNota notaRecuperadaAssinada = null;
@@ -687,7 +690,7 @@ public class NfeApi {
         DFModelo dfmodelo = BuscarModelo(modelo);
         String retorno = null;
 
-        com.fincatto.documentofiscal.nfe400.classes.evento.inutilizacao.NFRetornoEventoInutilizacao nfretornoeventoinutilizacao;
+        br.com.tegasistemas.documentofiscal.nfe400.classes.evento.inutilizacao.NFRetornoEventoInutilizacao nfretornoeventoinutilizacao;
         try {
             nfretornoeventoinutilizacao = new WSFacade(config).inutilizaNotaAssinada(xmlassinado, dfmodelo);
             retorno = nfretornoeventoinutilizacao.toString();
@@ -724,7 +727,7 @@ public class NfeApi {
         DFModelo dfmodelo = BuscarModelo(modelo);
 
         try {
-            com.fincatto.documentofiscal.nfe400.classes.evento.inutilizacao.NFRetornoEventoInutilizacao nfretornoeventoinutilizacao = new WSFacade(config).inutilizaNota(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa, dfmodelo);
+            br.com.tegasistemas.documentofiscal.nfe400.classes.evento.inutilizacao.NFRetornoEventoInutilizacao nfretornoeventoinutilizacao = new WSFacade(config).inutilizaNota(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa, dfmodelo);
             retorno = nfretornoeventoinutilizacao.toString();
 
         } catch (KeyManagementException e) {
