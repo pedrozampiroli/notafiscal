@@ -329,20 +329,18 @@ public class CTeAPI {
     }
 
     public String consultarSituacao(String chave, String xml) {
-        CTeNota cteRecuperado = null;
-        CTeNotaConsultaRetorno retorno = null;
+        CTeNota cteRecuperadoAssinado      = null;
+        CTeNotaConsultaRetorno notaRetorno = null;
         try {
-            retorno = new WSFacade(config).consultaNota(chave);
-            cteRecuperado = new DFPersister().read(CTeNota.class, xml);
-            CTeProcessado cte = new CTeProcessado();
-            cte.setVersao("3.00");
-            cte.setCte(cteRecuperado);
-            cte.setProtocolo(retorno.getProtocolo());
-            String xmlproc = cte.toString();
-            String procCte = new DFAssinaturaDigital(this.config).assinarDocumento(xmlproc);
-            logs = procCte;
-            System.out.println("XML....: " + xmlproc);
-            System.out.println("ProcCTE: " + procCte);
+            notaRetorno = new WSFacade(config).consultaNota(chave);
+
+            cteRecuperadoAssinado = new DFPersister().read(CTeNota.class, xml);
+
+            CTeProcessado cteProcessado = new CTeProcessado();
+            cteProcessado.setVersao("3.00");
+            cteProcessado.setProtocolo(notaRetorno.getProtocolo());
+            cteProcessado.setCte(cteRecuperadoAssinado);
+            logs = cteProcessado.toString();
         } catch (Exception e) {
             logs = e.getMessage();
         }
@@ -516,6 +514,27 @@ public class CTeAPI {
                 break;
         }
         return link;
+    }
+
+    public String assinarXml(String xml) {
+
+        xml = xml.replaceAll("\r", "");
+        xml = xml.replaceAll("\t", "");
+        xml = xml.replaceAll("\n", "");
+        xml = xml.replaceAll("\n", "");
+        xml = xml.replaceAll("&lt;", "<");
+        xml = xml.replaceAll("&gt;", ">");
+
+        String xmlAssinado = null;
+
+        try {
+            xmlAssinado = new DFAssinaturaDigital(config).assinarDocumento(xml);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            xmlAssinado += "error :" + e.getMessage();
+        }
+
+        return xmlAssinado;
     }
 
 }
