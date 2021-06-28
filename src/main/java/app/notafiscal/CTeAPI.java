@@ -329,7 +329,7 @@ public class CTeAPI {
     }
 
     public String consultarSituacao(String chave, String xml) {
-        CTeNota cteRecuperadoAssinado      = null;
+        CTeNota cteRecuperadoAssinado = null;
         CTeNotaConsultaRetorno notaRetorno = null;
         try {
             notaRetorno = new WSFacade(config).consultaNota(chave);
@@ -341,6 +341,7 @@ public class CTeAPI {
             cteProcessado.setProtocolo(notaRetorno.getProtocolo());
             cteProcessado.setCte(cteRecuperadoAssinado);
             logs = cteProcessado.toString();
+            //logs = new DFAssinaturaDigital(this.config).assinarDocumento(cteProcessado.toString(),"infCTe");
         } catch (Exception e) {
             logs = e.getMessage();
         }
@@ -516,25 +517,35 @@ public class CTeAPI {
         return link;
     }
 
-    public String assinarXml(String xml) {
-
-        xml = xml.replaceAll("\r", "");
-        xml = xml.replaceAll("\t", "");
-        xml = xml.replaceAll("\n", "");
-        xml = xml.replaceAll("\n", "");
-        xml = xml.replaceAll("&lt;", "<");
-        xml = xml.replaceAll("&gt;", ">");
-
-        String xmlAssinado = null;
+    public String assinarXml(String xmlRec) {
+        CTeNota c;
+        List<String> xml = new ArrayList<>();
+        xmlRec = xmlRec.replaceAll("\r", "");
+        xmlRec = xmlRec.replaceAll("\t", "");
+        xmlRec = xmlRec.replaceAll("\\s{2,}", "");
+        xmlRec = xmlRec.replaceAll("\n", "");
+        xmlRec = xmlRec.replaceAll("&gt;", ">");
+        xmlRec = xmlRec.replaceAll("&lt;", "<");
 
         try {
-            xmlAssinado = new DFAssinaturaDigital(config).assinarDocumento(xml);
+            c = new DFPersister().read(CTeNota.class, xmlRec);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            xmlAssinado += "error :" + e.getMessage();
+            logs = "Erro na conversão de CTe para objeto: " + e.getMessage();
+            System.out.println("-------------------------------------------------------------------------------------------");
+            System.out.println("JAVA erro de schema xml " + logs);
+            System.out.println("-------------------------------------------------------------------------------------------");
+            return logs;
         }
 
-        return xmlAssinado;
+        try {
+            String xmlCte = c.toString();
+            String xmlAssinado = new DFAssinaturaDigital(this.config).assinarDocumento(xmlCte, "infCte");
+            logs = xmlAssinado;
+            System.out.println("XML: " + xmlAssinado);
+        } catch (Exception e) {
+            logs = "error ao assinar CTe: " + e.getMessage();
+        }
+        return logs;
     }
 
 }
